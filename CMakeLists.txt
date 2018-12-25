@@ -3,4 +3,4 @@ project(yasuo)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(yasuo main.cpp)
+add_executable(yasuo main.cpp main.cpp)

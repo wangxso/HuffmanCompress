@@ -67,9 +67,8 @@ char *itoa(int num,char*str,int radix)
     }
     return str;
 }
-/*
- * 一个假装是进度的进度条
- * return none
+/**
+ * 一个假的进度条
  */
 void toolBar()
 {
@@ -86,20 +85,20 @@ void toolBar()
     printf("\n");
 }
 HuffmanNode huffmanNodes[MAXN];
-/*
- * selectMin
- * 选择最小的结点 生成哈弗曼树
- * return int 权值最小的结点的下标
- *
+/**
+ * 选择权值最小的结点的下标
+ * @param node 具有权值的哈夫曼树
+ * @param pointNumber 当前的下标
+ * @return 权值最小节点的下标
  */
 int selectMin(huffmanode *node,int pointNumber)
 {
     int i;
     int index;
-    long min = 6666666666;
+    long min = 6666666666;//赋值一个极大的数字
     for(i=0; i<=pointNumber; i++)
     {
-        //有父节点则不进行比较
+        //有父节点则不进行比较,已经在树中
         if(node[i].parent != -1)
         {
             continue;
@@ -112,11 +111,13 @@ int selectMin(huffmanode *node,int pointNumber)
     }
     return index;
 }
-/*
- * enCode 编码函数
- *
+/**
+ * 编码程序
+ * @param node 构造成的haffuman树
+ * @param nodeNumber 结点数量
+ * @return 程序运行完成
  */
-int enCode(HuffmanNode *node,int nodeNumber) {
+Status enCode(HuffmanNode *node,int nodeNumber) {
     int start;//标记编码起始点
     int i;//循环变量
     int j;
@@ -124,39 +125,46 @@ int enCode(HuffmanNode *node,int nodeNumber) {
     char codes[MAXN];//临时保存编码
     codes[nodeNumber - 1] = '\0';//编码结束标识符
     for (i = 0; i < nodeNumber; i++) {//逐个字符的求哈夫曼码
-        start = nodeNumber - 1;
+        start = nodeNumber - 1;//逆序求编码
         parent = node[i].parent;
-            for (j = i; parent != -1; j = parent, parent = node[parent].parent) {
-                start--;
-                if (node[parent].lchild == j) {
-                    codes[start] = '0';
-                } else {
-                    codes[start] = '1';
-                }
+        for (j = i; parent != -1; j = parent, parent = node[parent].parent) {
+            start--;
+            if (node[parent].lchild == j) {
+                codes[start] = '0';
+            } else {
+                codes[start] = '1';
             }
-            strcpy(node[i].code, &codes[start]);
-            node[i].codeLength = (int)strlen(node[i].code) ;
+        }
+        strcpy(node[i].code, &codes[start]);//保存编辑好的编码
+        node[i].codeLength = (int)strlen(node[i].code) ;//保存编码长度
     }
+    return OK;
 }
+/**
+ * 选择是否显示详细内容
+ * @param choice 选择项
+ * @param n 叶子节点数
+ * @param m 节点数
+ */
 void choosing(char choice,int n,int m){
     getchar();
     getchar();
 
     printf("编码完成,是否查看具体信息(Y/N)\n");
     scanf("%c",choice);
-        printf("\n叶子节点个数:%d,节点数为%d.\n",n,m);
-        for(int i=0; i<n; i++)
-        {
-            printf("%d号叶子结点的权值为：%ld,双亲为：%d,左孩子：%d,右孩子：%d,编码为：%s 数据为:%c\n",
-                   i,huffmanNodes[i].weight,huffmanNodes[i].parent,
-                   huffmanNodes[i].lchild,huffmanNodes[i].rchild,huffmanNodes[i].code,
-                   huffmanNodes[i].data);
-        }
+    printf("\n叶子节点个数:%d,节点数为%d.\n",n,m);
+    for(int i=0; i<n; i++)
+    {
+        printf("%d号叶子结点的权值为：%ld,双亲为：%d,左孩子：%d,右孩子：%d,编码为：%s 数据为:%c\n",
+               i,huffmanNodes[i].weight,huffmanNodes[i].parent,
+               huffmanNodes[i].lchild,huffmanNodes[i].rchild,huffmanNodes[i].code,
+               huffmanNodes[i].data);
+    }
 }
 /**
  *创建树
  */
- void createHuffmanNode(int &n){
+Status createHuffmanNode(int &n){
     //叶子节点初值
     n=0;
     //将ASCII码转换为字符存入到结点的data成员里,同时给双亲和孩子赋初值-1
@@ -185,7 +193,7 @@ void choosing(char choice,int n,int m){
         }
     }
     //初始化根节点
-    for(int i=n; i<m; i++)
+    for(int i=n; i<m; i++)// 1 --> n 保存叶子结点数据，没必要重复计算
     {
         huffmanNodes[i].lchild=-1;
         huffmanNodes[i].rchild=-1;
@@ -204,12 +212,12 @@ void choosing(char choice,int n,int m){
 
         huffmanNodes[i].weight = huffmanNodes[index_1].weight + huffmanNodes[index_2].weight;
     }
- }
+    return OK;
+}
 void comPress()
 {
     int i;
     int j;
-    int position;
     char filePath[100];
     char destPath[100];
     FILE * file_fp;
@@ -223,9 +231,6 @@ void comPress()
     int n;
     //节点数
     int m;
-    //权值最小的两个值的下标
-    int index_1;
-    int index_2;
     //存放哈夫曼编码
     char codes[MAXN];
     long sumLength=0;
@@ -233,7 +238,7 @@ void comPress()
     float rate;//压缩率
     float speed;//压缩速率
     int count = 0;
-    clock_t start_1;
+    clock_t start_1;//记录时间计算速率等
     clock_t end_1;
     clock_t start_2;
     clock_t end_2;
@@ -260,9 +265,12 @@ void comPress()
     }
 
     /////////////////////////////////////////////////////////////
+    //文件操作
+    /////////////////////////////////////////////////////////////
     start_1 = clock();
     FileLength = 0;
     //统计文件中各类字符的个数,用字符的ASCII码统计
+    //优化二叉排序树可达到算法复杂度O(logn)-O(n)，降低查找复杂度()
     while(!feof(file_fp))
     {
         fread(&ch,1,1,file_fp);
@@ -272,45 +280,47 @@ void comPress()
     //文件末尾存在\n,文件长度减一,最后一个统计的字符权值减一
     FileLength--;
     huffmanNodes[ch].weight--;
-    createHuffmanNode(n);
-    enCode(huffmanNodes,n);
+    ////////////////////////////////////////////////////////////////
+    createHuffmanNode(n);//创建哈弗曼树
+    enCode(huffmanNodes,n);//进行编码
+    ////////////////////////////////////////////////////////////////
     end_1 = clock();
-    interval_1 = (double)(end_1 - start_1) / CLOCKS_PER_SEC;
+    interval_1 = (double)(end_1 - start_1) / CLOCKS_PER_SEC;//计算时间
 
-    choosing(choice,n,2*n-1);
+    choosing(choice,n,2*n-1);//选择是否显示信息
 
     start_2 = clock();
-    fseek(file_fp,0,SEEK_SET);
-    fwrite(&FileLength,4,1,dest_fp);
-    fseek(dest_fp,8,SEEK_SET);
-    codes[0]=0;
+    fseek(file_fp,0,SEEK_SET);//设置文件指针file_fp 在文件 0个字节 的位置
+    fwrite(&FileLength,4,1,dest_fp);//写入文件的长度四位
+    fseek(dest_fp,8,SEEK_SET);//设置文件指针dest_fp 在文件 8个字节 的位置 SEEK_SET从开头计算
+    codes[0]=0;//初始化
     fileLength=0;
     while(!feof(file_fp))
     {
-        fread(&ch,1,1,file_fp);
+        fread(&ch,1,1,file_fp);//读入一项一个字节到ch
         //printf("%c",data);
-        fileLength++;
+        fileLength++;//目标文件计数++
         for(i=0; i<n; i++)
         {
-            if(ch==huffmanNodes[i].data)
+            if(ch==huffmanNodes[i].data)//找到他的位置
             {
                 break;
             }
         }
         strcat(codes,huffmanNodes[i].code);
-        while(strlen(codes)>=8)
+        while(strlen(codes)>=8)//重新编码为八位
         {
             for(i=0; i<8; i++)
             {
                 if(codes[i]=='1')
                 {
-                    ch = (ch<<1)|1;
+                    ch = (ch<<1)|1;//ch*2+1
                 }
                 else
                 {
-                    ch = ch<<1;
+                    ch = ch<<1;//ch*2
                 }
-            }
+            }//将八位转换成一位ch
             fwrite(&ch,1,1,dest_fp);
             sumLength++;
             strcpy(codes,codes+8);
@@ -339,6 +349,9 @@ void comPress()
         sumLength++;
     }
     sumLength+=8;
+    /***********
+     * 写入节点信息
+     *************/
     printf(" 编码区总长为：%ld 个字节 \n",sumLength-8);
     fseek(dest_fp,4,SEEK_SET);
     fwrite(&sumLength,4,1,dest_fp);
@@ -352,7 +365,7 @@ void comPress()
         //写入编码长度
         fwrite(&ch,1,1,dest_fp);
         //写入编码
-        if(huffmanNodes[i].codeLength%8!=0)
+        if(huffmanNodes[i].codeLength%8!=0)//不足八位补全
         {
             for(j=huffmanNodes[i].codeLength%8; j<8; j++)
             {
@@ -450,13 +463,13 @@ void unCompress()
     //读取节点信息
     for(i=0; i<n; i++)
     {
-        //字符
+        //读入字符
         fread(&(huffmanNodes[i].data),1,1,file_fp);
         //编码长度
         fread(&ch,1,1,file_fp);
         huffmanNodes[i].codeLength=ch;
         huffmanNodes[i].code[0]=0;
-        if(huffmanNodes[i].codeLength%8>0)
+        if(huffmanNodes[i].codeLength%8>0)//长度不是八位的
         {
             m = huffmanNodes[i].codeLength/8+1;
         }
@@ -510,14 +523,14 @@ void unCompress()
         }
         for(i=0; i<n; i++)
         {
-            if(memcmp(huffmanNodes[i].code,codes,(unsigned int)huffmanNodes[i].codeLength)==0)
+            if(memcmp(huffmanNodes[i].code,codes,(unsigned int)huffmanNodes[i].codeLength)==0)//找到那个长度相同的code在Huffman节点中
             {
                 break;
             }
         }
         strcpy(codes,codes+huffmanNodes[i].codeLength);
-        ch = huffmanNodes[i].data;
-        fwrite(&ch,1,1,dest_fp);
+        ch = huffmanNodes[i].data;//获得该字符
+        fwrite(&ch,1,1,dest_fp);//写入字符
         fileLength++;
         if(fileLength==FileLength)
         {
