@@ -12,7 +12,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b174db82-89ec-4a82-965a-17b2b681b8d5" name="Default Changelist" comment="提交">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/cmake-build-debug/1.jpeg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/cmake-build-debug/1.mp3" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/cmake-build-debug/1.txt" afterDir="false" />
@@ -67,7 +66,7 @@
       <change afterPath="$PROJECT_DIR$/cmake-build-debug/yasuo" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/cmake-build-debug/yasuo.cbp" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/cmake-build-debug/yasuo.layout" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -105,8 +104,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="700">
-              <caret line="443" column="5" lean-forward="true" selection-start-line="443" selection-start-column="5" selection-end-line="443" selection-end-column="5" />
+            <state relative-caret-position="13942">
+              <caret line="562" column="36" selection-start-line="562" selection-start-column="36" selection-end-line="562" selection-end-column="36" />
               <folding>
                 <element signature="e#56#75#0" expanded="true" />
               </folding>
@@ -205,9 +204,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="width" value="1920" />
-    <option name="height" value="1018" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-77" />
+    <option name="y" value="108" />
+    <option name="width" value="1910" />
+    <option name="height" value="763" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -217,7 +218,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -234,6 +234,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -295,7 +296,8 @@
       <workItem from="1545610242779" duration="4076000" />
       <workItem from="1545640060068" duration="106000" />
       <workItem from="1545696600708" duration="4357000" />
-      <workItem from="1545720887727" duration="1395000" />
+      <workItem from="1545720887727" duration="2662000" />
+      <workItem from="1545805826376" duration="1093000" />
     </task>
     <task id="LOCAL-00001" summary="提交">
       <created>1545310849600</created>
@@ -304,11 +306,18 @@
       <option name="project" value="LOCAL" />
       <updated>1545310849605</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="拆分函数">
+      <created>1545722367780</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1545722367780</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109603000" />
+    <option name="totallyTimeSpent" value="111963000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -321,19 +330,18 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1018" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.07041252" weight="0.22329059" />
-      <window_info id="Structure" order="1" sideWeight="0.9295875" side_tool="true" weight="0.20639534" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.06833713" visible="true" weight="0.22596154" />
+      <window_info id="Structure" order="1" sideWeight="0.93166286" side_tool="true" visible="true" weight="0.22596154" />
       <window_info id="Favorites" order="2" sideWeight="0.55892855" side_tool="true" weight="0.20245726" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49786323" visible="true" weight="0.44191343" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49786323" weight="0.44191343" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Database Changes" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.49893162" weight="0.3257403" />
+      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.49893162" weight="0.32423756" />
       <window_info anchor="bottom" id="TODO" order="8" weight="0.32954547" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.3284091" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32915717" />
@@ -350,7 +358,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="提交" />
-    <option name="LAST_COMMIT_MESSAGE" value="提交" />
+    <MESSAGE value="拆分函数" />
+    <option name="LAST_COMMIT_MESSAGE" value="拆分函数" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/HeapMin.h" />
@@ -469,8 +478,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="443" column="5" lean-forward="true" selection-start-line="443" selection-start-column="5" selection-end-line="443" selection-end-column="5" />
+        <state relative-caret-position="13942">
+          <caret line="562" column="36" selection-start-line="562" selection-start-column="36" selection-end-line="562" selection-end-column="36" />
           <folding>
             <element signature="e#56#75#0" expanded="true" />
           </folding>
